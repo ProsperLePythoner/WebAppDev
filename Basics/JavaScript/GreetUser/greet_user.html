@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greet User</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main class="main-container">
+        <h1>Greet User</h1>
+
+        <form class="form-container">
+            <div class="form-group">
+                <label for="userName">What is your name?</label>
+                <input
+                    type="text"
+                    id="userName"
+                    name="userName"
+                    autocomplete="userName"
+                    required
+                >
+            </div>
+
+            <button type="button" id="cta-button" onclick="greetUser()">Greet Me</button>
+        </form>
+
+        <p class="greeting-text" id="greetingText"></p>
+    </main>
+
+    <script src="js/greet_user.js"></script>
+</body>
+</html>

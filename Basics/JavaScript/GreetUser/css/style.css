@@ -1,0 +1,94 @@
+/* --- Global Styles & Reset --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* --- Card Container --- */
+.main-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* --- Form Elements --- */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+input[type="text"] {
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 15px;
+    font-size: 16px;
+    transition: border-color 0.2s ease;
+}
+
+/* Input highlight when clicked */
+input[type="text"]:focus {
+    outline: none;
+    border-color: #4a90e2;
+}
+
+/* --- Button Styles --- */
+#cta-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4a90e2;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* Hover effect */
+#cta-button:hover {
+    background-color: #357abd;
+}
+
+/* Click effect */
+#cta-button:active {
+    transform: scale(0.98);
+}
+
+/* --- Greeting Output Text --- */
+.greeting-text {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #2e7d32; /* Soft green color for greeting */
+}
