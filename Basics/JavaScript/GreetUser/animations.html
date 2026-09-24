@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animations</title>
+
+    <style>
+        #animation-container {
+            width: 300px;
+            height: 300px;
+            background-color: lightsalmon;
+            position: relative;
+        }
+
+        #animationBox {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            background-color: rebeccapurple;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Animations</h1>
+    <p>Click the button to see the animation:</p>
+
+    <div id="animation-container">
+        <div id="animationBox"></div>
+    </div>
+    <br>
+    <button id="animate" onclick="makeMove()">Animate!</button>
+</body>
+
+<script>
+    // Note that this approach isn't the best for performance, 
+    // but it is simple to understand and implement.
+    function makeMove() {
+        let id = null;
+        const box = document.getElementById("animationBox");
+        let pos = 0;
+        clearInterval(id);
+        id = setInterval(frame, 5);
+
+        function frame() {
+            if (pos === 250) {
+                clearInterval(id);
+            } else {
+                pos++;
+                box.style.top = pos + "px";
+                box.style.left = pos + "px";
+            }
+        }
+    }
+</script>
+</html>
