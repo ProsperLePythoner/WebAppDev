@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numeric Validation</title>
+</head>
+<body>
+    <main>
+        <h1>Numeric Validation</h1>
+        <form id="numericForm">
+            <label for="numberInput">Enter a number between 1 and 100:</label>
+            <input type="number" id="numberInput" name="numberInput" required>
+            <input type="button" value="Submit" id="submitBtn">
+        </form>
+        
+        <span id="errorMessage"></span>
+        <br>
+        <p>Check out the Tailwind CSS styled version of this page <a href="numeric_validation_tailwind.html">here</a>.</p>
+    </main>
+
+    <script>
+        const form = document.getElementById('numericForm');
+        const numberInput = document.querySelector('input[type="number"]');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorMessage = document.getElementById('errorMessage');
+
+        submitBtn.addEventListener('click', () => {
+            const value = parseFloat(numberInput.value);
+
+            if (!isNaN(value) && value >= 1 && value <= 100) {
+                errorMessage.textContent = 'Valid number entered! Form submitted.';
+                errorMessage.style.color = 'green';
+            } else {
+                errorMessage.textContent = 'Please enter a valid number between 1 and 100.';
+                errorMessage.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
