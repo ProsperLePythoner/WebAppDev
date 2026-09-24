@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randomness?</title>
+</head>
+<style>
+    /* using a class to hide the paragraph */
+    .hidden {
+        display: none;
+    }
+</style>
+<body>
+    <h1>Hide or Show Text</h1>
+    <p id="p1">This is a paragraph of text that will be hidden and shown as required.</p>
+
+    <input type="button" value="Toggle Visibility">
+
+<script>
+    const button = document.querySelector('input[type="button"]');
+    const paragraph = document.getElementById('p1');
+
+    button.addEventListener('click', () => {
+        paragraph.classList.toggle('hidden');
+    });
+</script>
+</body>
+</html>

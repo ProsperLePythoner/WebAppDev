@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Form Validation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom smooth transition for focus ring and borders */
+        .input-field {
+            transition: all 0.2s ease-in-out;
+        }
+        /* Strength bar progress transition */
+        .strength-bar {
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex items-center justify-center p-4 md:p-8">
+
+    <div class="w-full max-w-xl bg-slate-800 rounded-2xl shadow-2xl border border-slate-700 overflow-hidden">
+        <!-- Header -->
+        <div class="bg-slate-800/80 p-6 md:p-8 border-b border-slate-700 text-center relative">
+            <div class="inline-flex items-center justify-center w-12 h-12 bg-indigo-600/20 text-indigo-400 rounded-xl mb-3">
+                <i class="fa-solid fa-user-plus text-2xl"></i>
+            </div>
+            <h1 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Create Account</h1>
+            <p class="text-slate-400 text-sm mt-1">Please fill out the form below to register.</p>
+        </div>
+
+        <form id="registrationForm" class="p-6 md:p-8 space-y-5" novalidate>
+            
+            <!-- Full Name Field -->
+            <div class="form-control flex flex-col space-y-1">
+                <label for="fullName" class="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                    Full Name <span class="text-rose-400">*</span>
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                        <i class="fa-regular fa-user"></i>
+                    </div>
+                    <input 
+                        type="text" 
+                        id="fullName" 
+                        name="fullName"
+                        placeholder="John Doe" 
+                        class="input-field w-full pl-10 pr-10 py-3 bg-slate-900/80 border border-slate-700 rounded-xl text-slate-100 text-sm placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    >
+                    <div class="status-icon absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none opacity-0 transition-opacity">
+                        <i class="fa-solid fa-circle-check text-emerald-400 hidden success-i"></i>
+                        <i class="fa-solid fa-circle-exclamation text-rose-400 hidden error-i"></i>
+                    </div>
+                </div>
+                <p class="error-msg text-xs text-rose-400 font-medium hidden mt-1"></p>
+            </div>
+
+            <!-- Email Field -->
+            <div class="form-control flex flex-col space-y-1">
+                <label for="email" class="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                    Email Address <span class="text-rose-400">*</span>
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                        <i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email"
+                        placeholder="john@example.com" 
+                        class="input-field w-full pl-10 pr-10 py-3 bg-slate-900/80 border border-slate-700 rounded-xl text-slate-100 text-sm placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    >
+                    <div class="status-icon absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none opacity-0 transition-opacity">
+                        <i class="fa-solid fa-circle-check text-emerald-400 hidden success-i"></i>
+                        <i class="fa-solid fa-circle-exclamation text-rose-400 hidden error-i"></i>
+                    </div>
+                </div>
+                <p class="error-msg text-xs text-rose-400 font-medium hidden mt-1"></p>
+            </div>
+
+            <!-- Phone Number Field -->
+            <div class="form-control flex flex-col space-y-1">
+                <label for="phone" class="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                    Phone Number <span class="text-rose-400">*</span>
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone"
+                        placeholder="+1 (555) 000-0000" 
+                        class="input-field w-full pl-10 pr-10 py-3 bg-slate-900/80 border border-slate-700 rounded-xl text-slate-100 text-sm placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    >
+                    <div class="status-icon absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none opacity-0 transition-opacity">
+                        <i class="fa-solid fa-circle-check text-emerald-400 hidden success-i"></i>
+                        <i class="fa-solid fa-circle-exclamation text-rose-400 hidden error-i"></i>
+                    </div>
+                </div>
+                <p class="error-msg text-xs text-rose-400 font-medium hidden mt-1"></p>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-control flex flex-col space-y-1">
+                <label for="password" class="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                    Password <span class="text-rose-400">*</span>
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password"
+                        placeholder="••••••••" 
+                        class="input-field w-full pl-10 pr-12 py-3 bg-slate-900/80 border border-slate-700 rounded-xl text-slate-100 text-sm placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    >
+                    <button 
+                        type="button" 
+                        id="togglePassword"
+                        class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-400 hover:text-slate-200 focus:outline-none"
+                        title="Toggle password visibility"
+                    >
+                        <i class="fa-regular fa-eye"></i>
+                    </button>
+                </div>
+                
+                <div class="mt-2 space-y-1">
+                    <div class="flex justify-between items-center text-xs text-slate-400">
+                        <span>Password strength:</span>
+                        <span id="strengthText" class="font-medium text-slate-400">Weak</span>
+                    </div>
+                    <div class="w-full bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                        <div id="strengthBar" class="strength-bar h-full w-0 bg-slate-500"></div>
+                    </div>
+                </div>
+                <p class="error-msg text-xs text-rose-400 font-medium hidden mt-1"></p>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="form-control flex flex-col space-y-1">
+                <label for="confirmPassword" class="text-xs font-semibold uppercase tracking-wider text-slate-300">
+                    Confirm Password <span class="text-rose-400">*</span>
+                </label>
+                <div class="relative">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        name="confirmPassword"
+                        placeholder="••••••••" 
+                        class="input-field w-full pl-10 pr-10 py-3 bg-slate-900/80 border border-slate-700 rounded-xl text-slate-100 text-sm placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    >
+                    <div class="status-icon absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none opacity-0 transition-opacity">
+                        <i class="fa-solid fa-circle-check text-emerald-400 hidden success-i"></i>
+                        <i class="fa-solid fa-circle-exclamation text-rose-400 hidden error-i"></i>
+                    </div>
+                </div>
+                <p class="error-msg text-xs text-rose-400 font-medium hidden mt-1"></p>
+            </div>
+
+            <div class="form-control flex flex-col space-y-1 pt-1">
+                <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                        <input 
+                            id="terms" 
+                            name="terms" 
+                            type="checkbox" 
+                            class="w-4 h-4 rounded bg-slate-900 border-slate-700 text-indigo-600 focus:ring-indigo-500 focus:ring-offset-slate-800 cursor-pointer"
+                        >
+                    </div>
+                    <div class="ml-3 text-sm">
+                        <label for="terms" class="text-slate-300 cursor-pointer">
+                            I agree to the <a href="#" class="text-indigo-400 hover:underline">Terms of Service</a> and <a href="#" class="text-indigo-400 hover:underline">Privacy Policy</a>
+                        </label>
+                    </div>
+                </div>
+                <p class="error-msg text-xs text-rose-400 font-medium hidden mt-1"></p>
+            </div>
+
+            <!-- Submit Button -->
+            <button 
+                type="submit" 
+                class="w-full py-3.5 px-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-sm rounded-xl shadow-lg shadow-indigo-600/30 transition duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-slate-800"
+            >
+                Create Account
+            </button>
+        </form>
+    </div>
+
+    <div id="successModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-slate-800 rounded-2xl max-w-sm w-full p-6 text-center border border-slate-700 shadow-2xl transform scale-95 opacity-0 transition-all duration-300" id="modalCard">
+            <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Registration Successful!</h3>
+            <p class="text-slate-400 text-sm mb-6">Your account has been created successfully with valid inputs.</p>
+            <button 
+                id="closeModal" 
+                class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold rounded-xl text-sm transition focus:outline-none"
+            >
+                Continue
+            </button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Element References
+            const form = document.getElementById('registrationForm');
+            const fullName = document.getElementById('fullName');
+            const email = document.getElementById('email');
+            const phone = document.getElementById('phone');
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+            const terms = document.getElementById('terms');
+            const togglePasswordBtn = document.getElementById('togglePassword');
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthText = document.getElementById('strengthText');
+            const successModal = document.getElementById('successModal');
+            const modalCard = document.getElementById('modalCard');
+            const closeModalBtn = document.getElementById('closeModal');
+
+            
+            // Set input error state
+            function setError(input, message) {
+                const formControl = input.closest('.form-control');
+                const errorMsg = formControl.querySelector('.error-msg');
+                const statusIcon = formControl.querySelector('.status-icon');
+                
+                // Style input field
+                if (input.type !== 'checkbox') {
+                    input.classList.remove('border-slate-700', 'border-emerald-500', 'focus:border-indigo-500', 'focus:ring-indigo-500');
+                    input.classList.add('border-rose-500', 'focus:border-rose-500', 'focus:ring-rose-500');
+                }
+
+                // Show error message
+                errorMsg.innerText = message;
+                errorMsg.classList.remove('hidden');
+
+                // Update status icons if available
+                if (statusIcon) {
+                    statusIcon.classList.remove('opacity-0');
+                    statusIcon.querySelector('.success-i').classList.add('hidden');
+                    statusIcon.querySelector('.error-i').classList.remove('hidden');
+                }
+            }
+
+            // Set input success state
+            function setSuccess(input) {
+                const formControl = input.closest('.form-control');
+                const errorMsg = formControl.querySelector('.error-msg');
+                const statusIcon = formControl.querySelector('.status-icon');
+
+                // Style input field
+                if (input.type !== 'checkbox') {
+                    input.classList.remove('border-slate-700', 'border-rose-500', 'focus:border-indigo-500', 'focus:ring-indigo-500');
+                    input.classList.add('border-emerald-500', 'focus:border-emerald-500', 'focus:ring-emerald-500');
+                }
+
+                // Hide error message
+                errorMsg.classList.add('hidden');
+
+                // Update status icons if available
+                if (statusIcon) {
+                    statusIcon.classList.remove('opacity-0');
+                    statusIcon.querySelector('.error-i').classList.add('hidden');
+                    statusIcon.querySelector('.success-i').classList.remove('hidden');
+                }
+            }
+
+            // RegEx Checks
+            const isValidEmail = (val) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+            const isValidPhone = (val) => /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/.test(val);
+
+            
+            function validateFullName() {
+                const value = fullName.value.trim();
+                if (value === '') {
+                    setError(fullName, 'Full name is required.');
+                    return false;
+                } else if (value.length < 3) {
+                    setError(fullName, 'Name must be at least 3 characters.');
+                    return false;
+                } else {
+                    setSuccess(fullName);
+                    return true;
+                }
+            }
+
+            function validateEmail() {
+                const value = email.value.trim();
+                if (value === '') {
+                    setError(email, 'Email address is required.');
+                    return false;
+                } else if (!isValidEmail(value)) {
+                    setError(email, 'Please enter a valid email address.');
+                    return false;
+                } else {
+                    setSuccess(email);
+                    return true;
+                }
+            }
+
+            function validatePhone() {
+                const value = phone.value.trim();
+                if (value === '') {
+                    setError(phone, 'Phone number is required.');
+                    return false;
+                } else if (!isValidPhone(value)) {
+                    setError(phone, 'Enter a valid phone number (e.g., 1234567890).');
+                    return false;
+                } else {
+                    setSuccess(phone);
+                    return true;
+                }
+            }
+
+            function validatePassword() {
+                const value = password.value;
+                if (value === '') {
+                    setError(password, 'Password is required.');
+                    return false;
+                } else if (value.length < 8) {
+                    setError(password, 'Password must be at least 8 characters long.');
+                    return false;
+                } else {
+                    setSuccess(password);
+                    return true;
+                }
+            }
+
+            function validateConfirmPassword() {
+                const passValue = password.value;
+                const confirmValue = confirmPassword.value;
+
+                if (confirmValue === '') {
+                    setError(confirmPassword, 'Please confirm your password.');
+                    return false;
+                } else if (confirmValue !== passValue) {
+                    setError(confirmPassword, 'Passwords do not match.');
+                    return false;
+                } else {
+                    setSuccess(confirmPassword);
+                    return true;
+                }
+            }
+
+            function validateTerms() {
+                if (!terms.checked) {
+                    setError(terms, 'You must accept the terms and conditions to proceed.');
+                    return false;
+                } else {
+                    setSuccess(terms);
+                    return true;
+                }
+            }
+
+            function checkPasswordStrength(val) {
+                let score = 0;
+                if (!val) {
+                    strengthBar.style.width = '0%';
+                    strengthBar.className = 'strength-bar h-full bg-slate-500';
+                    strengthText.innerText = 'Weak';
+                    strengthText.className = 'font-medium text-slate-400';
+                    return;
+                }
+
+                if (val.length >= 8) score++;
+                if (/[A-Z]/.test(val)) score++;
+                if (/[0-9]/.test(val)) score++;
+                if (/[^A-Za-z0-9]/.test(val)) score++;
+
+                switch (score) {
+                    case 0:
+                    case 1:
+                        strengthBar.style.width = '25%';
+                        strengthBar.className = 'strength-bar h-full bg-rose-500';
+                        strengthText.innerText = 'Weak';
+                        strengthText.className = 'font-medium text-rose-400';
+                        break;
+                    case 2:
+                        strengthBar.style.width = '50%';
+                        strengthBar.className = 'strength-bar h-full bg-amber-500';
+                        strengthText.innerText = 'Fair';
+                        strengthText.className = 'font-medium text-amber-400';
+                        break;
+                    case 3:
+                        strengthBar.style.width = '75%';
+                        strengthBar.className = 'strength-bar h-full bg-blue-500';
+                        strengthText.innerText = 'Good';
+                        strengthText.className = 'font-medium text-blue-400';
+                        break;
+                    case 4:
+                        strengthBar.style.width = '100%';
+                        strengthBar.className = 'strength-bar h-full bg-emerald-500';
+                        strengthText.innerText = 'Strong';
+                        strengthText.className = 'font-medium text-emerald-400';
+                        break;
+                }
+            }
+
+            
+            // Blur & Input real-time validation
+            fullName.addEventListener('blur', validateFullName);
+            fullName.addEventListener('input', () => { if(fullName.classList.contains('border-rose-500')) validateFullName(); });
+
+            email.addEventListener('blur', validateEmail);
+            email.addEventListener('input', () => { if(email.classList.contains('border-rose-500')) validateEmail(); });
+
+            phone.addEventListener('blur', validatePhone);
+            phone.addEventListener('input', () => { if(phone.classList.contains('border-rose-500')) validatePhone(); });
+
+            password.addEventListener('input', (e) => {
+                checkPasswordStrength(e.target.value);
+                if (password.classList.contains('border-rose-500')) validatePassword();
+                if (confirmPassword.value !== '') validateConfirmPassword();
+            });
+            password.addEventListener('blur', validatePassword);
+
+            confirmPassword.addEventListener('blur', validateConfirmPassword);
+            confirmPassword.addEventListener('input', () => { if(confirmPassword.classList.contains('border-rose-500')) validateConfirmPassword(); });
+
+            terms.addEventListener('change', validateTerms);
+
+            // Toggle Password Visibility
+            togglePasswordBtn.addEventListener('click', () => {
+                const icon = togglePasswordBtn.querySelector('i');
+                if (password.type === 'password') {
+                    password.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    password.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Validate all fields
+                const isNameValid = validateFullName();
+                const isEmailValid = validateEmail();
+                const isPhoneValid = validatePhone();
+                const isPasswordValid = validatePassword();
+                const isConfirmValid = validateConfirmPassword();
+                const isTermsValid = validateTerms();
+
+                const isFormValid = isNameValid && isEmailValid && isPhoneValid && isPasswordValid && isConfirmValid && isTermsValid;
+
+                if (isFormValid) {
+                    // Show success modal with smooth transition
+                    successModal.classList.remove('hidden');
+                    setTimeout(() => {
+                        modalCard.classList.remove('scale-95', 'opacity-0');
+                        modalCard.classList.add('scale-100', 'opacity-100');
+                    }, 10);
+                }
+            });
+
+            // Close Modal Logic
+            closeModalBtn.addEventListener('click', () => {
+                modalCard.classList.remove('scale-100', 'opacity-100');
+                modalCard.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    successModal.classList.add('hidden');
+                    form.reset();
+                    // Reset field borders and icons
+                    document.querySelectorAll('.input-field').forEach(input => {
+                        input.classList.remove('border-emerald-500', 'border-rose-500');
+                        input.classList.add('border-slate-700');
+                    });
+                    document.querySelectorAll('.status-icon').forEach(icon => icon.classList.add('opacity-0'));
+                    checkPasswordStrength('');
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
