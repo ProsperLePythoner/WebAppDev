@@ -1,0 +1,308 @@
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+
+/* ==========================================================================
+   1. CSS VARIABLES & BASE RESET
+   ========================================================================== */
+:root {
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --bg-nav: rgba(15, 23, 42, 0.85); /* Semi-transparent dark bg for sticky header */
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-primary: #38f8f8;
+    --accent-hover: #02c7c7;
+    --border-color: #334155;
+    
+    --font-family: 'Play';
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+/* ==========================================================================
+   2. NAVBAR
+   ========================================================================== */
+.navbar {
+    /* Sticks to the top of the viewport during scroll */
+    position: sticky;
+    top: 0;
+
+    /* Ensures the navbar stays above other content */
+    z-index: 1000;
+
+    display: flex;
+    justify-content: space-between; /* Pushes brand to the left and links to the right */
+    align-items: center; /* Vertically centers items */
+
+    padding: 1.25rem 5%;
+
+    background-color: var(--bg-nav);
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border-bottom: 1px solid var(--border-color);
+}
+
+.brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent-primary);
+    /* text-decoration: 1px underline var(--accent-primary); */
+}
+
+/* ==========================================================================
+   3. HERO SECTION (WITH BACKGROUND IMAGE)
+   ========================================================================== */
+.hero-section {
+    /* Subtle dark overlay using linear-gradient so white text stays readable over any background image */
+    background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)),
+    url('images/cagin-kargi-Ix_NOdOwo70-unsplash.jpg') center/cover no-repeat;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.hero-section h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+}
+
+.hero-section p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    max-width: 600px;
+}
+
+/* Color accent for the typing text */
+.hero-content h1 .highlight {
+    color: var(--accent-primary, #38bdf8);
+}
+
+/* Blinking cursor animation */
+.cursor {
+    display: inline-block;
+    color: var(--accent-primary, #38bdf8);
+    font-weight: 300;
+    margin-left: 2px;
+    animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* ==========================================================================
+   4. ABOUT SECTION
+   ========================================================================== */
+.about-section {
+    padding: 4rem 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 6rem;
+    text-align: center;
+}
+
+.about-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--accent-primary);
+}
+
+/* ==========================================================================
+   4. SERVICES SECTION
+   ========================================================================== */
+.services-section {
+    padding: 4rem 5%;
+    text-align: center;
+}
+
+.services-section h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: var(--accent-primary);
+}
+
+/* Auto-fitting grid: keeps design responsive without writing multiple media queries */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.service-card {
+    background-color: var(--bg-card);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    text-align: left;
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-primary);
+}
+
+.service-card h3 {
+    margin-bottom: 0.75rem;
+    color: var(--text-main);
+}
+
+.service-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   5. CONTACT SECTION & FORM
+   ========================================================================== */
+.contact-section {
+    padding: 4rem 5%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-section h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: var(--accent-primary);
+}
+
+.contact-section > p {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.75rem;
+    border-radius: var(--border-radius);
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+}
+
+.btn-action.primary {
+    width: 100%;
+    padding: 0.85rem;
+    background-color: var(--accent-primary);
+    color: var(--bg-main);
+    font-weight: 600;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-action.primary:hover {
+    background-color: var(--accent-hover);
+}
+
+.contact-channels {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+.contact-channels p {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.social-link,
+.social-links a {
+    color: var(--accent-primary);
+    transition: var(--transition);
+}
+
+.social-link:hover,
+.social-links a:hover {
+    color: var(--text-main);
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   6. FOOTER
+   ========================================================================== */
+.footer {
+    text-align: center;
+    padding: 2rem 1rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 1rem;
+    color: var(--text-primary);
+}

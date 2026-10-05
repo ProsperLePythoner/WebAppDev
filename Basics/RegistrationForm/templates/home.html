@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Welcome</title>
+    <link rel="stylesheet" href="/Basics/RegistrationForm/css/global.css">
+    <link rel="stylesheet" href="/Basics/RegistrationForm/css/forms.css">
+    <style>
+        /* Base Page Styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* 1. Navigation Bar */
+        .navbar {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+        .navbar .brand {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .navbar .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar .nav-links a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .navbar .nav-links a:hover,
+        .navbar .nav-links a.active {
+            color: #007bff;
+        }
+        .logout-btn {
+            padding: 0.4rem 0.9rem;
+            background-color: #dc3545;
+            color: #fff !important;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+
+        /* Container Layout */
+        .dashboard-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex: 1;
+        }
+
+        /* 2. Welcome Header Banner */
+        .welcome-header {
+            background: #ffffff;
+            padding: 1.5rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+        .welcome-header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.75rem;
+        }
+        .welcome-header p {
+            margin: 0;
+            color: #666;
+        }
+
+        /* 3. Stat Cards / Quick Metrics */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .stat-card {
+            background: #ffffff;
+            padding: 1.25rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .stat-card .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #007bff;
+            margin-top: 0.25rem;
+        }
+        .stat-card .stat-label {
+            font-size: 0.85rem;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* 4. Dashboard Content Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .panel h2 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Activity List */
+        .activity-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .activity-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        .activity-time {
+            color: #999;
+            font-size: 0.8rem;
+        }
+
+        /* Quick Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .btn-action {
+            display: block;
+            text-align: center;
+            padding: 0.6rem 1rem;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        .btn-action:hover {
+            background-color: #0056b3;
+        }
+        .btn-action.secondary {
+            background-color: #6c757d;
+        }
+        .btn-action.secondary:hover {
+            background-color: #5a6268;
+        }
+
+        /* 5. Footer */
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.85rem;
+            color: #888;
+            background-color: #ffffff;
+            border-top: 1px solid #e9ecef;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Widget 1: Top Navigation Bar -->
+    <nav class="navbar">
+        <a href="#" class="brand">AppLogo</a>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="login.html" class="logout-btn">Log Out</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="dashboard-container">
+        
+        <!-- Widget 2: Personal Welcome Banner -->
+        <header class="welcome-header">
+            <h1>Welcome Back, User! 👋</h1>
+            <p>Here is a quick overview of your account and recent activity.</p>
+        </header>
+
+        <!-- Widget 3: Quick Overview Metrics (Stats Grid) -->
+        <section class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Active Projects</div>
+                <div class="stat-value">4</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Tasks Due Today</div>
+                <div class="stat-value">2</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Notifications</div>
+                <div class="stat-value">5</div>
+            </div>
+        </section>
+
+        <!-- Main Dashboard Section -->
+        <div class="dashboard-grid">
+            
+            <!-- Widget 4: Recent Activity Feed -->
+            <section class="panel">
+                <h2>Recent Activity</h2>
+
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <span>Logged in successfully</span>
+                        <span class="activity-time">Just now</span>
+                    </li>
+                    <li class="activity-item">
+                        <span>Updated profile settings</span>
+                        <span class="activity-time">2 hours ago</span>
+                    </li>
+                    <li class="activity-item">
+                        <span>Completed task: "Setup Dashboard"</span>
+                        <span class="activity-time">Yesterday</span>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Widget 5: Quick Action Sidebar -->
+            <aside class="panel">
+                <h2>Quick Actions</h2>
+                <div class="action-buttons">
+                    <a href="#" class="btn-action">Edit Profile</a>
+                    <a href="#" class="btn-action secondary">Account Settings</a>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- Widget 6: Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 My Web App. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
