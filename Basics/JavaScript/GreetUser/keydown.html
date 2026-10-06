@@ -11,11 +11,16 @@
     :root {
         --primary-color: #4caf50;
         --secondary-color: #4ca0af;
+        --tertiary-color: #7bbbf7;
         --shadow-color: rgba(0, 0, 0, .1);
+        --alert-color: rgb(204, 90, 90);
+    }
+
+    * {
+        font-family: 'Edu QLD Hand', Arial, sans-serif;
     }
 
     body {
-        font-family: 'Edu QLD Hand', Arial, sans-serif;
         line-height: 1.6;
         color: #333;
     }
@@ -38,6 +43,15 @@
         font-weight: bold;
         color: var(--secondary-color);
     }
+
+    .controls button {
+        padding: 5px 10px;
+        margin: 10px;
+        border: none;
+        background-color: var(--tertiary-color);
+        border-radius: 5px;
+        cursor: pointer;
+    }
 </style>
 <body>
     <h1>Demonstrating Keydown Event</h1>
@@ -48,13 +62,21 @@
             <span id="output"></span>
         </p>
     </div>
+
+    <div class="controls">
+        <button id="toggleActivation">Toggle Keydown Activation</button>
+    </div>
 </body>
 
 <script>
     const inputField = document.getElementById('InputField');
     const output = document.getElementById('output');
+    const toggleActivationButton = document.getElementById('toggleActivation');
 
-    inputField.addEventListener('keydown', (event) => {
+    let isListenerActive = true;
+
+    // Named handler function so it can be added and removed by reference
+    function handleKeyDown(event) {
         output.style.color = '';
         if (event.code !== 'Enter') {
             output.textContent = `You pressed: ${event.key}`;
@@ -62,6 +84,27 @@
             output.style.color = 'red';
             output.textContent = `You pressed Enter! Doofus!`;
         }
+    }
+
+    // Attach listener initially
+    inputField.addEventListener('keydown', handleKeyDown);
+
+    toggleActivationButton.addEventListener('click', () => {
+        if (isListenerActive) {
+            inputField.removeEventListener('keydown', handleKeyDown);
+            output.style.color = 'var(--alert-color)';
+            output.textContent = 'You deactivated the keydown event listener.';
+        } else {
+            inputField.addEventListener('keydown', handleKeyDown);
+            output.style.color = 'var(--secondary-color)';
+            output.textContent = 'Keydown listener re-activated. Start typing...';
+        }
+        
+        isListenerActive = !isListenerActive;
+    });
+
+    window.addEventListener('resize', () => {
+        console.log(`Window resized to: ${window.innerWidth} x ${window.innerHeight}`);
     })
 </script>
 </html>
