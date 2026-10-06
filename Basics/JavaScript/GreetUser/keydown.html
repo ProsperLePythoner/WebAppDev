@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keydown Event</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Edu+QLD+Hand:wght@400..700&display=swap');
+
+    :root {
+        --primary-color: #4caf50;
+        --secondary-color: #4ca0af;
+        --shadow-color: rgba(0, 0, 0, .1);
+    }
+
+    body {
+        font-family: 'Edu QLD Hand', Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    h1 {
+        text-align: center;
+        color: var(--primary-color);
+    }
+
+    .input-container input[type="text"] {
+        padding: 10px;
+        width: 300px;
+        border: 2px solid #ccc;
+        box-shadow: 2px 2px 5px var(--shadow-color);
+        display: block;
+        margin-top: 10px;
+    }
+
+    #output {
+        font-weight: bold;
+        color: var(--secondary-color);
+    }
+</style>
+<body>
+    <h1>Demonstrating Keydown Event</h1>
+    <div class="input-container">
+        <label for="inputField">Type something below:</label>
+        <input type="text" id="InputField" placeholder="Start typing...">
+        <p>
+            <span id="output"></span>
+        </p>
+    </div>
+</body>
+
+<script>
+    const inputField = document.getElementById('InputField');
+    const output = document.getElementById('output');
+
+    inputField.addEventListener('keydown', (event) => {
+        output.style.color = '';
+        if (event.code !== 'Enter') {
+            output.textContent = `You pressed: ${event.key}`;
+        } else {
+            output.style.color = 'red';
+            output.textContent = `You pressed Enter! Doofus!`;
+        }
+    })
+</script>
+</html>
